@@ -141,14 +141,14 @@ The customer attribute record is created, and you can upload the file by editing
 
 1. Drag and drop the `.csv` or `.zip` or `.gzip` data file into the drag-and-drop window.
     
-  >[!IMPORTANT]
-  >
-  >Specific data file requirements exist. See [Data File Requirements](crs-data-file.md) for more information. 
+   >[!IMPORTANT]
+   >
+   >Specific data file requirements exist. See [Data File Requirements](crs-data-file.md) for more information. 
     
-  After uploading the file, table data is displayed under the [!UICONTROL File Upload] heading on this page. You can validate the schema, configure subscriptions, or set up the FTP. 
+   After uploading the file, table data is displayed under the [!UICONTROL File Upload] heading on this page. You can validate the schema, configure subscriptions, or set up the FTP. 
     
-  ![attributes](assets/file_upload_attributes.png) 
-    
+   ![attributes](assets/file_upload_attributes.png) 
+  
 * **[!UICONTROL Unique customer ID:]** Displays how many unique IDs you have uploaded to this attribute source. 
     
 * **[!UICONTROL Customer-Provided IDs Aliased to Experience Cloud Visitor IDs:]** Displays how many IDs have been aliased to ECIDs. 
