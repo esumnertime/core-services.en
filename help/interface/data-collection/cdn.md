@@ -31,7 +31,7 @@ Some organizations route data collection requests through their content delivery
 | | Third-party origin (recommended) | First-party origin |
 | --- | --- | --- |
 | **Origin hostname** | Your tenant ID subdomain of `data.adobedc.net`, such as `example.data.adobedc.net` | Your first-party hostname, such as `data.example.com` |
-| **Certificate on Adobe servers** | Adobe's certificate | [Customer-managed certificate](customer-managed-cert.md) |
+| **Certificate on Adobe servers** | Adobe's certificate (`*.data.adobedc.net`) | [Customer-managed certificate](customer-managed-cert.md) |
 | **Certificate renewals** | None required | Your organization renews the certificate and provides it to Adobe before each expiration |
 | **Region-locked [RDC](rdc.md)** | Not supported | Supported |
 | **When to use** | All CDN implementations, unless your organization requires a first-party origin | Your security policy requires direct control of the origin certificate, or your organization requires a region-locked RDC type |

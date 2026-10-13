@@ -22,7 +22,7 @@ Your data collection domain is the hostname that your implementation sends data 
 
 ## Data collection domain options
 
-| Option | Example domain | Region-locked [RDC](rdc.md) | Certificate maintenance |
+| Option | Implementation domain | Region-locked [RDC](rdc.md) | Certificate maintenance |
 | --- | --- | --- | --- |
 | [Third-party domain](#third-party) | `example.data.adobedc.net` | Not supported | None |
 | First-party domain with an [Adobe-managed certificate](adobe-managed-cert.md) | `data.example.com` | Supported | None (Adobe renews the certificate automatically) |
