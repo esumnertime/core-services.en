@@ -60,7 +60,7 @@ topic_v2:
 
 The Adobe-managed certificate program is the recommended process for setting up first-party certificates needed for a CNAME implementation. The program is fully automated once configured. It renews certificates in a timely manner so that there is no impact to data collection due to expired certificates. The program is free for your first 100 CNAMEs.
 
-If you currently manage your own certificates, you are responsible for purchasing, maintaining, and providing a certificate to Adobe for first-party cookie use. To discuss migrating to the Adobe-managed certificate program, contact Adobe Customer Care.
+The Adobe-managed certificate program doesn't support routing data collection through a content delivery network (CDN). If you use a CDN, see [Route data collection through a CDN](cdn.md). Organizations that need to manage their own certificates can use [customer-managed certificates](customer-managed-cert.md) instead. If you currently manage your own certificates and want to move to the Adobe-managed certificate program, contact Adobe Customer Care.
 
 ## Implementation
 
@@ -130,14 +130,7 @@ Aliases: data.example.com
 
 ## Update implementation code
 
-To use your new CNAME hostname, update your Adobe implementation once you have validated that your certificate works correctly.
-
-* **Web SDK tag extension**: Update the [[!UICONTROL Edge domain]](https://experienceleague.adobe.com/en/docs/experience-platform/tags/extensions/client/web-sdk/configure/general) field when configuring the extension.
-* **Web SDK (alloy)**: Update the [`edgeDomain`](https://experienceleague.adobe.com/en/docs/experience-platform/collection/js/commands/configure/edgedomain) property within the `configure` command.
-* **Adobe Analytics extension**: Update the [[!UICONTROL SSL Tracking Server]](https://experienceleague.adobe.com/en/docs/experience-platform/tags/extensions/client/analytics/overview) field when configuring the extension. Make sure that you also have the [Visitor ID Service tag extension](https://experienceleague.adobe.com/en/docs/experience-platform/tags/extensions/client/id-service/overview) installed. See [Visitor identification using the Analytics tag extension](https://experienceleague.adobe.com/en/docs/analytics/implementation/id/analytics-extension) for more information.
-* **AppMeasurement**: Update the [`trackingServerSecure`](https://experienceleague.adobe.com/en/docs/analytics/implementation/vars/config-vars/trackingserversecure) configuration variable. Make sure that you also have the [Visitor ID Service](https://experienceleague.adobe.com/en/docs/id-service/using/home) implemented using `VisitorAPI.js`. See [Visitor identification using AppMeasurement](https://experienceleague.adobe.com/en/docs/analytics/implementation/id/appmeasurement) for more information.
-
-If your site uses multiple implementation methods and you cannot update all of them simultaneously, consider configuring a grace period. See [Visitor ID Service migration considerations](https://experienceleague.adobe.com/en/docs/analytics/implementation/id/migration) for additional steps on how to prevent visitors from being counted as new visitors across your site.
+To use your new CNAME hostname, update your Adobe implementation once you have validated that your certificate works correctly. See [Update your implementation](collection-domain.md#update-implementation).
 
 ## Maintenance and renewals
 
@@ -145,13 +138,13 @@ Thirty days before your first-party certificate expires, Adobe validates whether
 
 >[!IMPORTANT]
 >
->If your organization's CNAME record is removed or no longer maps to the provided Adobe secure hostname, Adobe cannot renew the certificate. The entry in Adobe's system is marked for removal without further communication.
+>If your organization's CNAME record is removed or no longer maps to the provided Adobe secure hostname, Adobe cannot renew the certificate. The entry in Adobe's system is marked for removal without further communication. This condition includes pointing your CNAME record to a content delivery network (CDN). If you plan to route data collection through a CDN, see [Move an existing first-party implementation to a CDN](cdn.md#migrate) before you change your DNS records.
 
 ## Frequently asked questions
 
 +++Is this process secure?
 
-Yes. The Adobe-managed certificate program is more secure than your organization providing Adobe with a certificate. No certificate or private key is transferred outside of Adobe and the issuing certificate authority.
+Yes. The Adobe-managed certificate program is more secure than [customer-managed certificates](customer-managed-cert.md). No certificate or private key is transferred outside of Adobe and the issuing certificate authority.
 
 +++
 
@@ -175,7 +168,7 @@ Adobe works with DigiCert to issue an SHA-2 certificate.
 
 +++Does this program incur any additional cost?
 
-No. Adobe offers this service to all Adobe CX Enterprise customers at no additional cost.
+Adobe offers this program to all Adobe CX Enterprise customers at no additional cost for the first 100 CNAMEs.
 
 +++
 
@@ -197,7 +190,7 @@ The following clients are known to be unable to connect with cipher security set
 
 +++What HTTPS certificate types are supported?
 
-Adobe supports both RSA and ECC certificate types to meet varying customer needs. RSA certificates are more widely supported for clients, but ECC certificates use less processing on both the server and client side. For Adobe-managed certificates, both RSA and ECC are provided. For customer-managed certificates, RSA is required and ECC is recommended. Modern clients support both RSA and ECC. The following clients support only RSA certificates:
+Adobe supports both RSA and ECC certificate types to meet varying customer needs. RSA certificates are more widely supported for clients, but ECC certificates use less processing on both the server and client side. For Adobe-managed certificates, both RSA and ECC are provided. For [customer-managed certificates](customer-managed-cert.md), RSA is required and ECC is recommended. Modern clients support both RSA and ECC. The following clients support only RSA certificates:
 
 * Windows Vista and earlier (last updated in 2012)
 * Windows Phone 8.0 and earlier (last updated in 2014)
@@ -205,10 +198,5 @@ Adobe supports both RSA and ECC certificate types to meet varying customer needs
 * iOS 5.1 and earlier (last updated in 2012)
 * Android 4.3 and earlier (last updated in 2013)
 
-+++
-
-+++Can I manage my own certificates instead?
-
-Yes. However, if you manage your own certificates, you are responsible for renewing your certificates and providing them to Adobe each time you renew them. This process is less secure and can cause gaps in data collection if your organization forgets to renew a certificate in time. Adobe recommends using the managed certificate program instead of managing certificates yourself, especially due to reductions in TLS certificate maximum lifetime. See [6.3.2 Certificate operational periods and key pair usage periods](https://cabforum.org/working-groups/server/baseline-requirements/requirements/#632-certificate-operational-periods-and-key-pair-usage-periods) in the CA/Browser Forum Server Certificate Baseline Requirements for more information.
 +++
 
