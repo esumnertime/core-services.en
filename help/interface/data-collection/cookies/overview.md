@@ -34,7 +34,7 @@ Laws often require you to get permission before storing or using cookies on some
 
 Adobe CX Enterprise uses cookies to track information that doesn't last between page views or browser sessions. When possible, Adobe uses first-party cookies (tied to your own website). To track activity across multiple sites or domains you own, third-party cookies are needed.
 
-Some browsers and anti-spyware tools block third-party cookies. Adobe has ways to make sure cookies still work even if cookies are blocked. How this works depends on whether you use the Visitor ID Service (`VisitorAPI.js`) or older Analytics cookies (like the `s_vi` cookie):
+Some browsers block third-party cookies. Adobe has ways to make sure cookies still work even if cookies are blocked. How this process works depends on whether you use the Visitor ID Service (`VisitorAPI.js`) or older Analytics cookies (like the `s_vi` cookie):
 
 * [Visitor ID Service](https://experienceleague.adobe.com/en/docs/id-service/using/intro/overview): The Visitor ID Service always sets first-party cookies, whether your collection domain matches your site domain. It uses JavaScript to place the cookie on your site's domain.
 
@@ -43,7 +43,7 @@ Some browsers and anti-spyware tools block third-party cookies. Adobe has ways t
   * If your data collection server matches your site's domain, cookies are first-party.
   * If it doesn't match, cookies are third-party. If third-party cookies are blocked, Adobe sets a fallback cookie (`s_fid`) instead of the usual one.
 
-To ensure that your collection server matches your site's domain, you can use a **CNAME setup**. This involves updating your DNS settings to point a custom domain (you own) to Adobe's servers. This makes the tracking cookie appear as first-party. While one CNAME can work across multiple domains, any domain that doesn't match the CNAME will still set third-party cookies.
+To ensure that your collection server matches your site's domain, you can use a **CNAME setup**. This setup involves updating your DNS settings to point a custom domain (you own) to Adobe's servers. This configuration makes the tracking cookie appear as first-party. While one CNAME can work across multiple domains, any domain that doesn't match the CNAME will still set third-party cookies. You can also [route data collection through a CDN](../cdn.md) that uses your own domain. See [Choose a data collection domain](../collection-domain.md) for all options.
 
 >[!NOTE]
 >

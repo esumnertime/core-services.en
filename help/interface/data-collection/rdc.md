@@ -45,6 +45,8 @@ First-party data collection uses a CNAME implementation to route data to Adobe t
 
 _*China RDC requires the China Performance Optimization add-on package, and only applies to Adobe Analytics using AppMeasurement data collection. Other CX Enterprise services and Web SDK data collection are not supported. Contact your Adobe Account Team to learn more about the China Performance Optimization add-on package._
 
+If you [route data collection through a CDN](cdn.md), region-locked RDC types require a first-party origin with a [customer-managed certificate](customer-managed-cert.md).
+
 ## Third-party data collection
 
 Third-party data collection uses cookie domains that don't match your website domain. Examples include `adobedc.net`, `omtrdc.net`, and `2o7.net`.
@@ -55,3 +57,5 @@ Third-party data collection uses cookie domains that don't match your website do
 | Default + China* | Beijing*, Oregon, Virginia, Ireland, Paris, Mumbai, Singapore, Tokyo, Sydney |
 
 _*Requires the China Performance Optimization add-on package. See the first-party data collection section above for details._
+
+Data routed through a CDN to a [third-party origin](cdn.md#third-party-origin) always uses the default RDC type.

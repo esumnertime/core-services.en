@@ -46,7 +46,10 @@ index: true
   + [Triggers](/help/interface/services/triggers.md)
   + [Adobe Exchange](/help/interface/services/exchange.md)
 + Data collection {#data-collection}
+  + [Choose a data collection domain](/help/interface/data-collection/collection-domain.md)
   + [Adobe-managed certificate program](/help/interface/data-collection/adobe-managed-cert.md)
+  + [Customer-managed certificates](/help/interface/data-collection/customer-managed-cert.md)
+  + [Route data collection through a CDN](/help/interface/data-collection/cdn.md)
   + [IP addresses](/help/interface/data-collection/ip-addresses.md)
   + [Domains](/help/interface/data-collection/domains.md)
   + Cookies {#cookies}
