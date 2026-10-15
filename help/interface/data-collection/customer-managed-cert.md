@@ -36,7 +36,7 @@ With a customer-managed certificate, your organization obtains the certificate f
 
 | | Adobe-managed certificate | Customer-managed certificate |
 | --- | --- | --- |
-| **Who obtains the certificate** | Adobe, through DigiCert | Your organization, through the certificate authority of your choice |
+| **Who obtains the certificate** | Adobe, through DigiCert | Your organization, through a commercial certificate authority of your choice |
 | **Renewals** | Adobe renews the certificate automatically | Your organization renews the certificate and provides it to Adobe before each expiration |
 | **Certificate types** | Adobe provides both RSA and ECC certificates | RSA is required; ECC is recommended |
 | **Supported with a CDN** | No | Yes, as a first-party origin |
@@ -44,7 +44,8 @@ With a customer-managed certificate, your organization obtains the certificate f
 ## Set up a customer-managed certificate
 
 1. Contact Adobe Customer Care to request first-party data collection with a customer-managed certificate. Include your first-party hostname, such as `data.example.com`. If your organization has data residency or compliance requirements, specify your desired [RDC type](rdc.md) in your request.
-1. Obtain a certificate for your hostname from your certificate authority, and provide it to Adobe as instructed by Adobe Customer Care. An RSA certificate is required. Adobe also recommends providing an ECC certificate.
+1. Adobe Customer Care provides a certificate signing request (CSR) for your hostname. Adobe generates and keeps the private key, so your organization never handles the private key. Adobe requires an RSA certificate and recommends an ECC certificate. Each certificate type requires its own CSR, so if you want an ECC certificate, ask Adobe Customer Care for an ECC CSR.
+1. Submit each CSR to the desired commercial certificate authority to obtain a signed certificate. Free certificate services aren't supported. Provide the issued certificates to Adobe as instructed by Customer Care.
 1. Once Adobe installs your certificate, direct traffic for your hostname to Adobe:
    * **Without a CDN**: Update your organization's DNS records as instructed by Adobe Customer Care.
    * **With a CDN**: Set your CDN origin to your first-party hostname. See [Configure a CDN with a first-party origin](cdn.md#first-party-origin).

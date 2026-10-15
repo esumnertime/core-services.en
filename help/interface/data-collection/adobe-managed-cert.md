@@ -68,7 +68,7 @@ To implement a new certificate for first-party data collection, follow these ste
 
 1. Download and fill out the [First-party domain request form](cookies/assets/First_Party_Domain_Request_Form.xlsx)
 1. Open a ticket with Adobe Customer Care requesting to set up first-party data collection on the Adobe-managed certificate program. If your organization has data residency or compliance requirements, specify your desired [RDC type](rdc.md) in your request.
-1. Upon receiving the ticket, the Adobe representative provides you with a CNAME record. This record must be configured on your company's DNS server before Adobe can purchase the certificate on your behalf. For example, the hostname `data.example.com` points to `hiodsibxvip01.data.adobedc.net`.
+1. Upon receiving the ticket, the Adobe representative provides you with a CNAME record. This record must be configured on your company's DNS server before Adobe can purchase the certificate on your behalf. For example, the hostname `data.example.com` points to `hiodsibxvip01.data.adobedc.net`. If your organization uses DNS Certificate Authority Authorization (CAA) records, make sure that your CAA records allow DigiCert to issue certificates. See [Maintenance and renewals](#renewals).
 1. When the CNAME record is in place on your organization's servers, Adobe works with DigiCert to purchase and install a certificate on Adobe data collection servers.
 1. If you need an update to your `robots.txt` file when hosted by Adobe CNAME for first-party purposes, reach out to Customer Care with a request. Such a request is relevant when you want to update the `robots.txt` file to prevent Google from crawling your subdomains.
 
@@ -132,13 +132,17 @@ Aliases: data.example.com
 
 To use your new CNAME hostname, update your Adobe implementation once you have validated that your certificate works correctly. See [Update your implementation](collection-domain.md#update-implementation).
 
-## Maintenance and renewals
+## Maintenance and renewals {#renewals}
 
-Thirty days before your first-party certificate expires, Adobe validates whether the CNAME is still valid and in use. If so, Adobe assumes that you want to continue using the service, and automatically renews the certificate on your behalf. 
+Adobe renews your certificate automatically. Thirty days before your certificate expires, Adobe validates that the CNAME is still valid and in use, and then renews the certificate on your behalf. To keep renewals working, avoid the following DNS changes:
+
+* **Removing or repointing your CNAME record**: If the CNAME record is removed or no longer points to the Adobe secure hostname, Adobe can't renew the certificate. This condition includes pointing the CNAME record to a content delivery network (CDN). If you plan to use a CDN, see [Move an existing first-party implementation to a CDN](cdn.md#migrate) before you change your DNS records.
+* **Adding CAA records that don't authorize DigiCert**: Certificate authorities check Certificate Authority Authorization (CAA) records on your hostname and its parent domains. If you use CAA records, include `digicert.com` as an authorized issuer. For example, `example.com. IN CAA 0 issue "digicert.com"`.
+* **Restricting DigiCert issuance to a specific account**: DigiCert's domain locking feature adds an `account=` parameter to a CAA record, such as `example.com. IN CAA 0 issue "digicert.com; account=<token>"`. This parameter restricts issuance to your organization's DigiCert account, even if `digicert.com` is authorized, which prevents Adobe from obtaining a certificate. If your organization requires DigiCert domain locking, use [customer-managed certificates](customer-managed-cert.md) instead. Domain locks set at your domain registrar, sometimes called transfer locks, are unrelated and don't affect Adobe-managed certificates.
 
 >[!IMPORTANT]
 >
->If your organization's CNAME record is removed or no longer maps to the provided Adobe secure hostname, Adobe cannot renew the certificate. The entry in Adobe's system is marked for removal without further communication. This condition includes pointing your CNAME record to a content delivery network (CDN). If you plan to route data collection through a CDN, see [Move an existing first-party implementation to a CDN](cdn.md#migrate) before you change your DNS records.
+>If your CNAME record no longer points to the Adobe secure hostname, the entry in Adobe's system is marked for removal without further communication.
 
 ## Frequently asked questions
 
@@ -177,26 +181,13 @@ Adobe offers this program to all Adobe CX Enterprise customers at no additional 
 Adobe offers two cipher security levels to meet varying customer needs for security on first-party data collection. These levels determine which encryption algorithms are supported for HTTPS connections with Adobe servers. Adobe regularly reviews and updates the set of supported algorithms based on current security practices. To change your cipher security settings, contact Customer Care.
 
 * **Standard** requires TLS 1.2 or newer and at least 128-bit encryption. It is designed to provide the widest device compatibility while maintaining secure encryption.
-* **High** requires TLS 1.2 or newer and removes support for weaker ciphers. It is designed for customers who desire the strongest encryption and are not concerned about support for older devices.
-
-The following clients are known to be unable to connect with cipher security set to **High**:
-
-* Windows 8.1 and earlier (last updated in 2018)
-* Windows Phone 8.1 and earlier (last updated in 2016)
-* OS X 10.10 and earlier (last updated in 2017)
-* iOS 8.4 and earlier (last updated in 2015)
+* **High** requires TLS 1.2 or newer and removes support for weaker ciphers. It is designed for customers who want the strongest encryption. Clients released before 2015 typically can't connect when cipher security is set to **High**.
 
 +++
 
 +++What HTTPS certificate types are supported?
 
-Adobe supports both RSA and ECC certificate types to meet varying customer needs. RSA certificates are more widely supported for clients, but ECC certificates use less processing on both the server and client side. For Adobe-managed certificates, both RSA and ECC are provided. For [customer-managed certificates](customer-managed-cert.md), RSA is required and ECC is recommended. Modern clients support both RSA and ECC. The following clients support only RSA certificates:
-
-* Windows Vista and earlier (last updated in 2012)
-* Windows Phone 8.0 and earlier (last updated in 2014)
-* OS X 10.8 and earlier (last updated in 2013)
-* iOS 5.1 and earlier (last updated in 2012)
-* Android 4.3 and earlier (last updated in 2013)
+Adobe supports both RSA and ECC certificates, and modern clients support both certificate types. ECC certificates require less processing on both the server and the client. For Adobe-managed certificates, Adobe provides both RSA and ECC certificates. For [customer-managed certificates](customer-managed-cert.md), RSA is required and ECC is recommended.
 
 +++
 
