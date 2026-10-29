@@ -62,6 +62,10 @@ Generally, a trigger can take 15-90 minutes to launch a marketing campaign. This
 * **Action:** You can create triggers, for example, to fire after newsletter sign-ups, email subscriptions, or applications for credit cards (confirmations). If you are a retailer, you can create a trigger for a visitor who signs up for a loyalty program. In media and entertainment, create triggers for visitors who watch a certain show, and perhaps you want to respond with a survey.
 * **Session Start and Session End:** Create a trigger for session start and session end events.
 
+## Hold period for abandonment triggers
+
+Abandonment triggers have a fixed hold period of one hour after a trigger session ends, whether or not the trigger fires. During this period, a new session for the same abandonment trigger does not start for that visitor, even if the visitor returns and meets the trigger conditions again. The hold period is not configurable.
+
 ## Create a CX Enterprise trigger 
 
 Create a trigger and configure the conditions for the trigger. For example, you can specify the criteria for a trigger's rules during a visit, such as metrics like Cart Abandon, or dimensions like the product name. When the rules are met, the trigger runs.
